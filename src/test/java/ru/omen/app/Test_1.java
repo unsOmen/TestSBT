@@ -31,6 +31,7 @@ public class Test_1 {
         step2();
         step3();
         step4();
+        step5();
     }
 
     void setDriver(WebDriver driver) {
@@ -112,6 +113,11 @@ public class Test_1 {
     }
 
     void step5() {
-
+        // .//*[@id='views']/form/section/section/section[2]/div[1]/div[2]/div
+        String path = ".//*[@id='views']/form/section/section/section[2]/div[1]/div[2]/div";
+        WebElement element = driver.findElement(By.xpath(path));
+        element.click();
+        Assert.assertEquals(element.getAttribute("class").contains("b-form-active-box"), true);
+        System.out.println("step5_OK");
     }
 }
