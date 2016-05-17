@@ -7,6 +7,11 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -15,9 +20,30 @@ import java.util.concurrent.TimeUnit;
 public class Init {
 
     private static WebDriver driver;
+    private static HashMap<String, String> stash;
+
+    public static void initProperties() {
+        String cfg = "src/test/java/config/application.properties";
+        Properties prop = new Properties();
+        try {
+            prop.load(new FileReader(cfg));
+            stash = new HashMap<>();
+            for(String str : prop.stringPropertyNames()) {
+                stash.put(str, prop.getProperty(str));
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public static String getProperty(String prop) {
+        return stash.get(prop);
+    }
 
     public static WebDriver getDriver() {
         if(null==driver) {
+            initProperties();
             createWebDriver();
         }
 
@@ -30,7 +56,7 @@ public class Init {
 
     public static void createWebDriver() {
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        switch (System.getProperty("browser")) {
+        switch (stash.get("browser")) {
             case "Firefox":
                 capabilities.setBrowserName("firefox");
                 setDriver(new FirefoxDriver(capabilities));
