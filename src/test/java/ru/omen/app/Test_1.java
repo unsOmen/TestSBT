@@ -87,10 +87,9 @@ public class Test_1 {
 
     void step1() {
         String str = "Страхование путешественников";
-        String className = "l-header-title";
 
         driver.get(url);
-        WebElement element = driver.findElement(By.className(className));
+        WebElement element = driver.findElement(By.className("l-header-title"));
         Assert.assertEquals(str, element.getText());
         System.out.println("step1_OK");
     }
