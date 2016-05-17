@@ -1,7 +1,8 @@
 package ru.omen.app;
 
 import junit.framework.Assert;
-import org.junit.Test;
+import lib.Init;
+import org.junit.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,24 +26,38 @@ public class Test_1 {
     static final String url = "https://online.sberbankins.ru/store/vzr/index.html#/viewCalc";
     static String pathSum = ".//*[@id='views']/form/section/section/section[5]/div/dl[2]/dd[1]/span[1]";
 
-    @Test
+    //@Test
     public void Test() throws Exception {
-        testSetup(new InternetExplorerDriver());
-        testSetup(new FirefoxDriver());
-        testSetup(new ChromeDriver());
+        testSetup(Init.getDriver());
+    }
+
+    @BeforeClass
+    public static void beforeClassTest() {
+        System.out.println("=============== START ===============");
+    }
+
+    @Before
+    public void beforeTest() {
+        System.out.println("SBT TEST !");
+    }
+
+    @After
+    public void afterTest() {
+        System.out.println(driver.getClass().getName() + " quit!");
+    }
+
+    @AfterClass
+    public static void afterClassTest() {
+        System.out.println("================================================");
     }
 
     void setDriver(WebDriver driver) {
         this.driver = driver;
         System.out.println(this.driver.getClass().getName() + " start!");
-        this.driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-        this.driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
     }
 
     void quitDriver() {
-        System.out.println(driver.getClass().getName() + " quit!");
         this.driver.quit();
-        System.out.println("================================================");
     }
 
     float getFloatValue(String path) {
@@ -229,5 +244,4 @@ public class Test_1 {
             quitDriver();
         }
     }
-
 }
