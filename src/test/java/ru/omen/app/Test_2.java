@@ -30,7 +30,7 @@ public class Test_2 {
 
     @After
     public void after() {
-        //driver.quit();
+        driver.quit();
         System.out.println(driver.getClass().getName() + " quit!");
     }
 
