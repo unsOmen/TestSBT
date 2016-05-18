@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 public class Init {
 
     private static WebDriver driver;
-    private static HashMap<String, String> stash;
+    private static HashMap<Object, Object> stash;
 
     public static void initProperties() {
         String cfg = "src/test/java/config/application.properties";
@@ -31,32 +31,38 @@ public class Init {
             for(String str : prop.stringPropertyNames()) {
                 stash.put(str, prop.getProperty(str));
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    public static String getProperty(String prop) {
+
+    public static void setProperty(Object key, Object value) {
+        stash.put(key, value);
+    }
+
+    public static Object getProperty(String prop) {
         return stash.get(prop);
+    }
+
+    public static void clearProperties() {
+        stash.clear();
     }
 
     public static WebDriver getDriver() {
         if(null==driver) {
-            initProperties();
             createWebDriver();
         }
 
         return driver;
     }
 
-    public static void setDriver(WebDriver driver) {
+    static void setDriver(WebDriver driver) {
         Init.driver = driver;
     }
 
-    public static void createWebDriver() {
+    static void createWebDriver() {
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        switch (stash.get("browser")) {
+        switch (stash.get("browser").toString()) {
             case "Firefox":
                 capabilities.setBrowserName("firefox");
                 setDriver(new FirefoxDriver(capabilities));
