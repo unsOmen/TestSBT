@@ -34,7 +34,7 @@ public class Test_2 {
 
     @After
     public void after() {
-        //driver.quit();
+        driver.quit();
         System.out.println(driver.getClass().getName() + " quit!");
     }
 
@@ -45,11 +45,10 @@ public class Test_2 {
 
     @Test
     public void scenario() throws InterruptedException {
-        driver.get(Init.getProperty("url"));
+        driver.get(Init.getProperty("url.test2"));
         driver.findElement(By.xpath("//input[@id='text']")).sendKeys("selenium для чайников");
         driver.findElement(By.xpath("//span[@class='button__text' and text()='Найти']//..//../button")).click();
         (new WebDriverWait(driver, 10)).
                 until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()[contains(.,'Википедия')]]"))).click();
-        //driver.findElement(By.xpath("//*[text()[contains(.,'Википедия')]]")).click();
     }
 }

@@ -23,10 +23,9 @@ import java.util.concurrent.TimeUnit;
 public class Test_1 {
 
     static WebDriver driver;
-    static final String url = "https://online.sberbankins.ru/store/vzr/index.html#/viewCalc";
     static String pathSum = ".//*[@id='views']/form/section/section/section[5]/div/dl[2]/dd[1]/span[1]";
 
-    //@Test
+    @Test
     public void Test() throws Exception {
         testSetup(Init.getDriver());
     }
@@ -44,6 +43,7 @@ public class Test_1 {
     @After
     public void afterTest() {
         System.out.println(driver.getClass().getName() + " quit!");
+        //driver.quit();
     }
 
     @AfterClass
@@ -54,10 +54,6 @@ public class Test_1 {
     void setDriver(WebDriver driver) {
         this.driver = driver;
         System.out.println(this.driver.getClass().getName() + " start!");
-    }
-
-    void quitDriver() {
-        this.driver.quit();
     }
 
     float getFloatValue(String path) {
@@ -88,7 +84,7 @@ public class Test_1 {
     void step1() {
         String str = "Страхование путешественников";
 
-        driver.get(url);
+        driver.get(Init.getProperty("url.test1"));
         WebElement element = driver.findElement(By.className("l-header-title"));
         Assert.assertEquals(str, element.getText());
         System.out.println("step1_OK");
@@ -100,6 +96,8 @@ public class Test_1 {
         WebElement element = (new WebDriverWait(driver,10))
                 .until(ExpectedConditions.presenceOfElementLocated(By.className("b-dropdown-title")));
         Assert.assertEquals(element.getText(), "Весь мир, кроме США и РФ");
+
+
 
         element = driver.findElement(By.name("duration"));
         Assert.assertEquals(element.getAttribute("value"), "15");
@@ -147,7 +145,6 @@ public class Test_1 {
 
     void step4(float need_sum, float difference, boolean log) throws Exception {
         Thread.sleep(10000);
-        // .//*[@id='views']/form/section/section/section[5]/div/dl[2]/dd[1]/span[1] // Итоговая стоимость
 
         float sum = getFloatValue(pathSum);
         Assert.assertTrue("Большая разница суммы: sum = " + sum + " | need_sum = " + need_sum,
@@ -231,7 +228,7 @@ public class Test_1 {
             step2();
             step3();
             step4(850.26f, 50.0f, true);
-            step5(".//*[@id='views']/form/section/section/section[2]/div[1]/div[2]/div", true); // Минимальная
+            step5(".//*[@id='views']/form/section/section/section[2]/div[1]/div[2]/div", true); // Достаточная
             step6();
             step7();
             step8();
@@ -239,8 +236,6 @@ public class Test_1 {
             step10();
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            quitDriver();
         }
     }
 }
