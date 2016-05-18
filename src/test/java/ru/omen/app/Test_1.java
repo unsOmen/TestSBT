@@ -10,11 +10,6 @@ import ru.omen.app.stepDefinitions.StepsDefinitions;
  */
 public class Test_1 {
 
-    @Test
-    public void Test() {
-        new StepsDefinitions().testPlan(Init.getDriver());
-    }
-
     @BeforeClass
     public static void beforeClassTest() {
         System.out.println("=============== START ===============");
@@ -23,6 +18,11 @@ public class Test_1 {
     @Before
     public void beforeTest() {
         Init.initProperties();
+    }
+
+    @Test
+    public void Test() {
+        new StepsDefinitions().testPlan(Init.getDriver());
     }
 
     @After
