@@ -7,7 +7,6 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
@@ -27,7 +26,12 @@ public class Init {
         Properties prop = new Properties();
         try {
             prop.load(new FileReader(cfg));
-            stash = new HashMap<>();
+
+            if(stash!=null)
+                stash.clear();
+            else
+                stash = new HashMap<>();
+
             for(String str : prop.stringPropertyNames()) {
                 stash.put(str, prop.getProperty(str));
             }
@@ -42,10 +46,6 @@ public class Init {
 
     public static Object getProperty(String prop) {
         return stash.get(prop);
-    }
-
-    public static void clearProperties() {
-        stash.clear();
     }
 
     public static WebDriver getDriver() {

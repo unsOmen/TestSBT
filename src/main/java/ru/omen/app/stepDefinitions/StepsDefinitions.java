@@ -39,8 +39,9 @@ public class StepsDefinitions {
 
     void clickAndCheckSum(String pathClick, String pathAdd) throws InterruptedException {
         float sum = getFloatValue(sumPath);
-        selectBlock(pathClick);
         float add = getFloatValue(pathAdd, 1);
+
+        selectBlock(pathClick);
         checkSum(sum+add, 0.5f);
     }
 
@@ -59,7 +60,7 @@ public class StepsDefinitions {
         Thread.sleep(2000);
 
         WebElement element = (new WebDriverWait(driver,10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.className("b-dropdown-title")));
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(@class,'b-dropdown-title')]")));
         Assert.assertEquals(element.getText(), "Весь мир, кроме США и РФ");
 
         element = driver.findElement(By.name("duration"));
@@ -116,7 +117,6 @@ public class StepsDefinitions {
     }
 
     public void selectBlock(String path) {
-        // .//*[@id='views']/form/section/section/section[2]/div[1]/div[2]/div // Достаточная
         WebElement element = driver.findElement(By.xpath(path));
         element.click();
         Assert.assertEquals(element.getAttribute("class").contains("b-form-active-box"), true);
@@ -134,7 +134,7 @@ public class StepsDefinitions {
     // step 8
     public void checkTextValue() {
         String pathText1 = sportPath + "//span[contains(@class, 'b-form-box-title')]";
-        String pathText2 = sportPath + "//ul//li";
+        String pathText2 = sportPath + "//ul//li[1]";
         String pathText3 = sportPath + "//ul//li[2]";
         String pathText4 = sportPath + "//ul//li[3]";
         String pathText5 = sportPath + pricePath;

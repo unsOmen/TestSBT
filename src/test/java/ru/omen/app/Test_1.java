@@ -21,7 +21,7 @@ public class Test_1 {
     }
 
     @Test
-    public void Test() {
+    public void test() {
         new StepsDefinitions().testPlan(Init.getDriver());
     }
 
@@ -29,7 +29,6 @@ public class Test_1 {
     public void afterTest() {
         System.out.println(Init.getDriver().getClass().getName() + " quit!");
         //Init.getDriver().quit();
-        Init.clearProperties();
     }
 
     @AfterClass
