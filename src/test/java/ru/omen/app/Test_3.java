@@ -19,7 +19,7 @@ import static org.junit.runners.Parameterized.*;
 /**
  * Created by OmeN on 19.05.2016.
  */
-@RunWith(value = Parameterized.class)
+//@RunWith(value = Parameterized.class)
 public class Test_3 {
 
     private WebDriver driver;
@@ -36,7 +36,7 @@ public class Test_3 {
         this.btnSearch = btn;
     }
 
-    @Parameters
+    //@Parameters
     public static Collection<Object[]> data() {
         Object[][] data = new Object[][] {
                 {"https://www.yandex.ru/", "yandex карты", "//input[@id='text']", "//button[span[text()='Найти']]"},
@@ -53,7 +53,7 @@ public class Test_3 {
         driver = Init.getDriver();
     }
 
-    @Test
+    //@Test
     public void test() {
         driver.get(url);
         driver.findElement(By.xpath(filedText)).sendKeys(text);
