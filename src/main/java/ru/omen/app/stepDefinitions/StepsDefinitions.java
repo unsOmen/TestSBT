@@ -107,7 +107,7 @@ public class StepsDefinitions {
             selectProvidentBlock(); // step 9
 
             System.out.println("-------------STEP 10--------------");
-            selectProtectBag(); // step 10
+            //selectProtectBag(); // step 10
 
             System.out.println("Test complete!");
         } catch (InterruptedException e) {
