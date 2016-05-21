@@ -11,7 +11,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 
@@ -91,10 +90,10 @@ public class CurrencyConverterPage extends AnyPages {
             Assert.assertTrue("Поле для ввода значений не отображается", element.isDisplayed());
         }
 
-        Assert.assertTrue("Неверный формат вывода строки " + txtConvertResult.get(0).getText(), txtConvertResult.get(0).getText().matches("1"));
-        Assert.assertTrue("Неверный формат вывода строки " + txtConvertResult.get(2).getText(), txtConvertResult.get(2).getText().matches("[A-Z][A-Z][A-Z]"));
-        Assert.assertTrue("Неверный формат вывода строки " + txtConvertResult.get(4).getText(), new Float(txtConvertResult.get(4).getText()) > 0);
-        Assert.assertTrue("Неверный формат вывода строки " + txtConvertResult.get(6).getText(), txtConvertResult.get(6).getText().matches("[A-Z][A-Z][A-Z]"));
+        Assert.assertTrue("Неверный формат строки " + txtConvertResult.get(0).getText(), txtConvertResult.get(0).getText().matches("1"));
+        Assert.assertTrue("Неверный формат строки " + txtConvertResult.get(2).getText(), txtConvertResult.get(2).getText().matches("[A-Z][A-Z][A-Z]"));
+        Assert.assertTrue("Неверный формат строки " + txtConvertResult.get(4).getText(), new Float(txtConvertResult.get(4).getText()) > 0);
+        Assert.assertTrue("Неверный формат строки " + txtConvertResult.get(6).getText(), txtConvertResult.get(6).getText().matches("[A-Z][A-Z][A-Z]"));
 
         System.out.println("all elements displayed_OK");
     }
@@ -127,7 +126,7 @@ public class CurrencyConverterPage extends AnyPages {
         BigDecimal rate = new BigDecimal(txtConvertResult.get(4).getText());
         BigDecimal result = countIN.multiply(rate).setScale(2, BigDecimal.ROUND_HALF_UP);
 
-        System.out.println(countIN+ "\n" + rate + "\n" + countOUT);
+        System.out.println("\tin = "+countIN+ "\n\trate = " + rate + "\n\tout = " + countOUT);
         try {
             Assert.assertTrue("Неверный результат: " + result + ", ", result.equals(countOUT));
         } catch (Throwable e) {

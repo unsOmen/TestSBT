@@ -53,17 +53,6 @@ public abstract class AnyPages {
         return new Float(value);
     }
 
-    public float getFloatValue(WebElement element, boolean attribute) {
-        String value = "";
-        if(attribute)
-            value = element.getAttribute("value").trim();
-        else
-            value = element.getText();
-        value = value.replaceAll(" ", "");
-        //System.out.println("\tgetValue " + element.getText() + " = " + value);
-        return new Float(value);
-    }
-
     public WebElement getElement(By by) {
         return new WebDriverWait(Init.getDriver(), 10).until(ExpectedConditions.presenceOfElementLocated(by));
     }
