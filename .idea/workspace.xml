@@ -2,15 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="48f31b8f-3705-4cce-af00-bc1b5c3593ae" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/lib/Init.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/ru/omen/app/App.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/ru/omen/app/pages/AnyPages.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/ru/omen/app/pages/TravelInsurancePage.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/ru/omen/app/stepDefinitions/StepsDefinitions.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/ru/omen/app/AppTest.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/ru/omen/app/Test_1.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/ru/omen/app/Test_2.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/ru/omen/app/Test_3.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SBT_Test.iws" />
@@ -1033,7 +1024,7 @@
       <workItem from="1463762648608" duration="195000" />
       <workItem from="1463813459151" duration="2826000" />
       <workItem from="1463816632565" duration="42000" />
-      <workItem from="1463816739845" duration="372000" />
+      <workItem from="1463816739845" duration="454000" />
     </task>
     <task id="LOCAL-00001" summary="upd 14/05/2016">
       <created>1463225584570</created>
@@ -1140,11 +1131,18 @@
       <option name="project" value="LOCAL" />
       <updated>1463817101066</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="upd14 21/05/2016">
+      <created>1463817120900</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1463817120900</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="85181000" />
+    <option name="totallyTimeSpent" value="85263000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1202,7 +1200,8 @@
     <MESSAGE value="upd10 19/05/2016&#10;add parameters" />
     <MESSAGE value="upd11 19/05/2016&#10;add pageObjects" />
     <MESSAGE value="upd12 20/05/2016" />
-    <option name="LAST_COMMIT_MESSAGE" value="upd12 20/05/2016" />
+    <MESSAGE value="upd14 21/05/2016" />
+    <option name="LAST_COMMIT_MESSAGE" value="upd14 21/05/2016" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
