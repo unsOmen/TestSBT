@@ -2,8 +2,10 @@ package ru.omen.app.pages;
 
 import lib.Init;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -18,7 +20,9 @@ public abstract class AnyPages {
     }
 
     private void waitPageToLoad() {
-        // найти скрипт
+        new WebDriverWait(Init.getDriver(), 30).until((ExpectedCondition<Boolean>) wd -> ((JavascriptExecutor)wd)
+                .executeScript("return document.readyState").equals("complete"));
+        System.out.println("Page Is loaded!");
     }
 
     public void click(WebElement element) {

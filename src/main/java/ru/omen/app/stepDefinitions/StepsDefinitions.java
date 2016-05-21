@@ -2,15 +2,12 @@ package ru.omen.app.stepDefinitions;
 
 import lib.Init;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+
 import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.omen.app.pages.TravelInsurancePage;
 
-import java.util.List;
 
 /**
  * Created by OmeN on 18.05.2016.
@@ -110,7 +107,7 @@ public class StepsDefinitions {
             //selectProtectBag(); // step 10
 
             System.out.println("Test complete!");
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
