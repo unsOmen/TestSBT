@@ -1,6 +1,7 @@
 package ru.omen.app.pages;
 
 import lib.Init;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -52,6 +53,17 @@ public abstract class AnyPages {
         return new Float(value);
     }
 
+    public float getFloatValue(WebElement element, boolean attribute) {
+        String value = "";
+        if(attribute)
+            value = element.getAttribute("value").trim();
+        else
+            value = element.getText();
+        value = value.replaceAll(" ", "");
+        //System.out.println("\tgetValue " + element.getText() + " = " + value);
+        return new Float(value);
+    }
+
     public WebElement getElement(By by) {
         return new WebDriverWait(Init.getDriver(), 10).until(ExpectedConditions.presenceOfElementLocated(by));
     }
@@ -59,4 +71,10 @@ public abstract class AnyPages {
     public WebElement getElement(String xpath) {
         return getElement(By.xpath(xpath));
     }
+
+    public void setText(WebElement element, Object text) {
+        element.clear();
+        element.sendKeys(text.toString());
+    }
+
 }

@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import ru.omen.app.stepDefinitions.ConverterStepsDefinitions;
 
 
 /**
@@ -15,8 +16,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  */
 
 public class Test_2 {
-
-    private static WebDriver driver;
 
     @BeforeClass
     public static void beforeClass() {
@@ -26,23 +25,17 @@ public class Test_2 {
     @Before
     public void beforeTest() {
         Init.initProperties();
-        driver = Init.getDriver();
-        System.out.println(driver.getClass().getName() + " getDriver!");
     }
 
-    //@Test
-    public void scenario() throws InterruptedException {
-        driver.get(Init.getProperty("url.test2").toString());
-        driver.findElement(By.xpath("//input[@id='text']")).sendKeys("selenium для чайников");
-        driver.findElement(By.xpath("//button[span[text()='Найти']]")).click();
-        (new WebDriverWait(driver, 10)).
-                until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(.,'Википедия')]"))).click();
+    @Test
+    public void test() throws InterruptedException {
+        new ConverterStepsDefinitions().testPlan(Init.getDriver());
     }
 
     @After
     public void afterTest() {
         //driver.quit();
-        System.out.println(driver.getClass().getName() + " quit!");
+        System.out.println(Init.getDriver().getClass().getName() + " quit!");
     }
 
     @AfterClass
