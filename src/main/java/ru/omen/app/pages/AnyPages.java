@@ -66,4 +66,13 @@ public abstract class AnyPages {
         element.sendKeys(text.toString());
     }
 
+    public void checkBox(WebElement elementCheck, WebElement elementClick, Boolean value) throws InterruptedException{
+        if(elementCheck.isSelected()!=value)
+            click(elementClick);
+
+        Assert.assertEquals("Неверное значение чекбокса, небходимо: " + value + ", элемент: " + elementCheck.isSelected(),
+                elementCheck.isSelected(), value);
+        System.out.println("\telement setCheckbox");
+    }
+
 }
