@@ -1,6 +1,7 @@
 package ru.omen.app.pages;
 
 import lib.Init;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -59,4 +60,19 @@ public abstract class AnyPages {
     public WebElement getElement(String xpath) {
         return getElement(By.xpath(xpath));
     }
+
+    public void setText(WebElement element, Object text) {
+        element.clear();
+        element.sendKeys(text.toString());
+    }
+
+    public void checkBox(WebElement elementCheck, WebElement elementClick, Boolean value) throws InterruptedException{
+        if(elementCheck.isSelected()!=value)
+            click(elementClick);
+
+        Assert.assertEquals("Неверное значение чекбокса, небходимо: " + value + ", элемент: " + elementCheck.isSelected(),
+                elementCheck.isSelected(), value);
+        System.out.println("\telement setCheckbox");
+    }
+
 }

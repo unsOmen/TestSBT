@@ -20,6 +20,7 @@ public class StepsDefinitions {
     static final String PATH_SPORT_PACK = "//div[span[text()='Спортивный']]";
     static final String PATH_PRED_PACK = "//div[span[text()='Предусмотрительный']]";
     static final String PATH_BAG_PACK = "//div[span[text()='Защита багажа']]";
+    static final String PATH_AVG_BLOCK = "//div[div[text()='Достаточная']]";
 
     static final String PATH_PRICE = "//span[contains(@class,'b-form-sum-big-font-size') and @aria-hidden='false']"; // Текст с ценой
 
@@ -89,7 +90,7 @@ public class StepsDefinitions {
             page.checkSumm(850.26f, 50.0f); // step 4
 
             System.out.println("-------------STEP 5--------------");
-            page.click(By.xpath("//div[div[text()='Достаточная']]")); // step 5
+            page.click(By.xpath(PATH_AVG_BLOCK)); // step 5
 
             System.out.println("-------------STEP 6--------------");
             page.checkSumm(1145.02f, 50.0f); // step 6
