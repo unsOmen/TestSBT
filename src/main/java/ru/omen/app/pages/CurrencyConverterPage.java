@@ -100,6 +100,14 @@ public class CurrencyConverterPage extends AnyPages {
         System.out.println("all elements displayed_OK");
     }
 
+    /**
+     * Устанавливает необходимые валюты, для полей "Поменять" и "На", также устанавливаете числовое значение
+     * для поля "Поменять"
+     *
+     * @param currencyIN - валюта, которую небходимо установить для поля "Поменять"
+     * @param currencyOUT - валюта, для поля "На"
+     * @param countIN - числовое значение поля "Поменять"
+     */
     public void selectCurrency(String currencyIN, String currencyOUT, Integer countIN) {
         String xpathCurrIN = "//div[contains(@id, 'select2-drop')]//li//div[contains(.,'" + currencyIN +"')]";
         String xpathCurrOUT = "//div[contains(@id, 'select2-drop')]//li//div[contains(.,'" + currencyOUT +"')]";
@@ -116,9 +124,9 @@ public class CurrencyConverterPage extends AnyPages {
     }
 
     public void checkCurrencyFields(String currencyIN, String currencyOUT) {
-        Assert.assertTrue("Выбрана неверная валюта: нужно: " + currencyIN
+        Assert.assertTrue("Выбрана неверная валюта, нужно: " + currencyIN
                 +", выбрана: " + fieldsSelectCurrency.get(0).getText(), fieldsSelectCurrency.get(0).getText().trim().equals(currencyIN));
-        Assert.assertTrue("Выбрана неверная валюта: нужно: " + currencyOUT
+        Assert.assertTrue("Выбрана неверная валюта, нужно: " + currencyOUT
                 +", выбрана: " + fieldsSelectCurrency.get(1).getText(), fieldsSelectCurrency.get(1).getText().trim().equals(currencyOUT));
     }
 
