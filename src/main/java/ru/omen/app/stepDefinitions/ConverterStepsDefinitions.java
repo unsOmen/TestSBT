@@ -55,6 +55,7 @@ public class ConverterStepsDefinitions {
             selectCurrenctyUSD_USD(); // step 8
             page.convertCurrency(); // step 9
 
+            System.out.println("Test complete!");
         } catch (Exception e) {
             e.printStackTrace();
         }

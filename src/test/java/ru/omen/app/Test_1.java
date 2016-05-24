@@ -20,7 +20,7 @@ public class Test_1 {
         Init.initProperties();
     }
 
-    //@Test
+    @Test
     public void test() {
         new StepsDefinitions().testPlan(Init.getDriver());
     }

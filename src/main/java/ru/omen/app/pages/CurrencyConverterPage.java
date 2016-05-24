@@ -58,7 +58,7 @@ public class CurrencyConverterPage extends AnyPages {
     private List<WebElement> txtConvertResult;
 
     public CurrencyConverterPage() {
-        new WebDriverWait(Init.getDriver(), 10)
+        new WebDriverWait(Init.getDriver(), 30)
                 .until(ExpectedConditions
                         .presenceOfElementLocated(By.xpath(xpathConverterText)));
 
@@ -69,10 +69,12 @@ public class CurrencyConverterPage extends AnyPages {
      * Проверка формата даты отображающейся в форме
      * @throws ParseException
      */
-    public void checkCurrentDate() throws ParseException {
+    public void checkCurrentDate() throws ParseException, InterruptedException {
+        new WebDriverWait(Init.getDriver(), 30).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(@class, 'currency-converter-date')]")));
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy");
         Assert.assertTrue("Формат даты не ДД ММММ ГГГГ",
                 dateFormat.format(dateFormat.parse(txtCurConverterDate.getText())).equals(txtCurConverterDate.getText()));
+
         System.out.println("date correct_OK");
     }
 

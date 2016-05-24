@@ -25,8 +25,8 @@ public class SearchAtmStepsDefinitions {
     public void testPlan(WebDriver driver) {
         this.driver = driver;
         try {
-            openURL(); // step 1
-            page = new SearchAtmPage();
+            openURL();
+            page = new SearchAtmPage(); // step 1
             page.setCheckboxFilial(true); // step 2, 3
             page.checkLocations(); // step 4
             page.setCheckboxTerminal(true); // step 5
@@ -34,6 +34,8 @@ public class SearchAtmStepsDefinitions {
             page.showMoreResult(); // step 7
             page.setCheckboxFilial(false); // step 8
             page.checkLocations(); // step 9
+
+            System.out.println("Test complete!");
         } catch (InterruptedException e) {
 
         }

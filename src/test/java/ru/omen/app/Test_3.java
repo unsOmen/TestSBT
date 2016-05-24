@@ -27,7 +27,7 @@ public class Test_3 {
 
     @After
     public void afterTest() {
-        //driver.quit();
+        Init.getDriver().quit();
         System.out.println(Init.getDriver().getClass().getName() + " quit!");
     }
 

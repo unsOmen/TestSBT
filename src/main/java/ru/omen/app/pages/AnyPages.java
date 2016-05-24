@@ -27,7 +27,7 @@ public abstract class AnyPages {
     }
 
     public void click(WebElement element) {
-        new WebDriverWait(Init.getDriver(), 10).until(ExpectedConditions.elementToBeClickable(element));
+        new WebDriverWait(Init.getDriver(), 30).until(ExpectedConditions.elementToBeClickable(element));
         element.click();
         System.out.println("\t" + element.getTagName() + " click!");
     }
@@ -54,7 +54,7 @@ public abstract class AnyPages {
     }
 
     public WebElement getElement(By by) {
-        return new WebDriverWait(Init.getDriver(), 10).until(ExpectedConditions.presenceOfElementLocated(by));
+        return new WebDriverWait(Init.getDriver(), 30).until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
     public WebElement getElement(String xpath) {
