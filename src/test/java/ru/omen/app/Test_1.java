@@ -1,39 +1,19 @@
 package ru.omen.app;
 
-import lib.Init;
-import org.junit.*;
-import ru.omen.app.stepDefinitions.StepsDefinitions;
 
+import cucumber.api.CucumberOptions;
+import cucumber.api.junit.Cucumber;
+import org.junit.runner.RunWith;
 
 /**
  * Created by OmeN on 14.05.2016.
  */
+
+@RunWith(Cucumber.class)
+@CucumberOptions(
+        features = {"src/main/java/ru/omen/app/features"},
+        glue={"ru.omen.app.stepDefinitions"}
+)
 public class Test_1 {
-
-    @BeforeClass
-    public static void beforeClassTest() {
-        System.out.println("=============== START ===============");
-    }
-
-    @Before
-    public void beforeTest() {
-        Init.initProperties();
-    }
-
-    @Test
-    public void test() {
-        new StepsDefinitions().testPlan(Init.getDriver());
-    }
-
-    @After
-    public void afterTest() {
-        System.out.println(Init.getDriver().getClass().getName() + " quit!");
-        //Init.getDriver().quit();
-    }
-
-    @AfterClass
-    public static void afterClassTest() {
-        System.out.println("================================================");
-    }
 
 }

@@ -1,11 +1,11 @@
 package ru.omen.app.stepDefinitions;
 
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.When;
 import lib.Init;
-import org.junit.Assert;
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-
-import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.omen.app.pages.TravelInsurancePage;
 
 
@@ -17,99 +17,116 @@ public class StepsDefinitions {
     private WebDriver driver;
     private TravelInsurancePage page;
 
-    static final String PATH_SPORT_PACK = "//div[span[text()='Спортивный']]";
-    static final String PATH_PRED_PACK = "//div[span[text()='Предусмотрительный']]";
-    static final String PATH_BAG_PACK = "//div[span[text()='Защита багажа']]";
     static final String PATH_AVG_BLOCK = "//div[div[text()='Достаточная']]";
 
-    static final String PATH_PRICE = "//span[contains(@class,'b-form-sum-big-font-size') and @aria-hidden='false']"; // Текст с ценой
+    @Before
+    public void setUp() {
+        Init.initProperties();
+        this.driver = Init.getDriver();
+    }
 
-    void openURL() {
+    @Given("^Открыть страницу, нужный текст отображен$")
+    public void openURL() {
+        System.out.println("-------------STEP 1--------------");
         driver.get(Init.getProperty("url.test1").toString());
         System.out.println("openURL_OK");
+        page = new TravelInsurancePage();
     }
 
-    void selectSportBlock() throws InterruptedException {
-        page.selectDopPackAndCheckSumm(PATH_SPORT_PACK, PATH_PRICE);
-        System.out.println("new selectSportBlock_OK");
+    @Given("^Проверить значения по умолчанию$")
+    public void check_def_values() throws InterruptedException {
+        System.out.println("-------------STEP 2--------------");
+        page.checkDefValues();
     }
 
-    void checkTextValue() {
-        String pathText1 = PATH_SPORT_PACK + "//span[contains(@class, 'b-form-box-title')]";
-        String pathText2 = PATH_SPORT_PACK + "//ul//li[1]";
-        String pathText3 = PATH_SPORT_PACK + "//ul//li[2]";
-        String pathText4 = PATH_SPORT_PACK + "//ul//li[3]";
-        String pathText5 = PATH_SPORT_PACK + PATH_PRICE;
-
-        WebElement element = driver.findElement(By.xpath(pathText1));
-        Assert.assertEquals(element.getText(), "Спортивный");
-
-        element = driver.findElement(By.xpath(pathText2));
-        Assert.assertEquals(element.getText(), "Активные виды спорта");
-
-        element = driver.findElement(By.xpath(pathText3));
-        Assert.assertEquals(element.getText(), "Защита спортинвентаря");
-
-        element = driver.findElement(By.xpath(pathText4));
-        Assert.assertEquals(element.getText(), "Ski-pass / Лавина");
-
-        element = driver.findElement(By.xpath(pathText5));
-        Assert.assertTrue("Строка не содержит ~2 485,01", element.getText()
-                .substring(0, element.getText().length()-1)
-                .trim()
-                .matches("^2 4\\d\\d,\\d\\d$"));
-
-        System.out.println("new checkTextValue_OK");
+    @Given("^Проверить доступность вкладов 'Оформление' и 'Подтверждение'$")
+    public void check_clickable_tab() {
+        System.out.println("-------------STEP 3--------------");
+        page.checkClickableTab();
     }
 
-    void selectProvidentBlock() throws InterruptedException {
-        page.selectDopPackAndCheckSumm(PATH_PRED_PACK, PATH_PRICE);
-        System.out.println("new selectProvidentBlock_OK");
+    @When("^Итоговая стоимость должна быть примерно \"([^\"]*)\", допускается разность \"([^\"]*)\"$")
+    public void check_sum(float sum, float diff) throws InterruptedException {
+        System.out.println("-------------STEP 4--------------"); // 850.26f, 50.0f
+        page.checkSumm(sum, diff);
     }
 
-    void selectProtectBag() throws InterruptedException {
-        page.click(By.xpath(PATH_SPORT_PACK));
-        page.selectDopPackAndCheckSumm(PATH_BAG_PACK, PATH_PRICE);
-        System.out.println("new selectProtectBag_OK");
+    @Given("^Выбрать блок 'Достаточная' в блоке 'Выберите сумму страховой защиты'$")
+    public void select_block_avg() {
+        System.out.println("-------------STEP 5--------------");
+        page.click(By.xpath(PATH_AVG_BLOCK)); // step 5
     }
 
+    @When("^Теперь 'Итоговая стоимость' должна быть примерно \"([^\"]*)\", допускается разность \"([^\"]*)\"$")
+    public void check_sum_after_select_new_block(float sum, float diff) throws InterruptedException {
+        System.out.println("-------------STEP 6--------------"); // 1145.02f, 50.0f
+        page.checkSumm(sum, diff); // step 6
+    }
+
+    @Given("^В секции 'Рекомендуем предусмотреть' выбрать блок 'Спортивный' и проверить 'Итоговая стоимость'$")
+    public void select_new_block() throws InterruptedException {
+        System.out.println("-------------STEP 7--------------");
+        page.selectSportBlock();
+    }
+
+    @Given("^Проверить текст значения «Спортивный» в блоке «Рекомендуем предусмотреть»$")
+    public void check_text_values() {
+        System.out.println("-------------STEP 8--------------");
+        page.checkTextValue();
+    }
+
+    @Given("^Выбрать дополнительно «Предусмотрительный» и проверить значение «Итоговая стоимость»$")
+    public void select_prov_block() throws InterruptedException {
+        System.out.println("-------------STEP 9--------------");
+        page.selectProvidentBlock();
+    }
+
+    @Given("^Выбрать дополнительно «Защита багажа», отключить значение «Спортивный» и проверить значение «Итоговая стоимость»$")
+    public void select_protect_block() throws InterruptedException {
+        System.out.println("-------------STEP 10--------------");
+        page.selectProtectBag();
+    }
     public void testPlan(WebDriver driver) {
-        this.driver = driver;
         try {
             System.out.println("-------------STEP 1--------------");
-            openURL(); // step 1
+            //openURL(); // step 1
 
-            page = new TravelInsurancePage();
+
             System.out.println("-------------STEP 2--------------");
-            page.checkDefValues(); // step 2
+            //page.checkDefValues(); // step 2
 
             System.out.println("-------------STEP 3--------------");
-            page.checkClickableTab(); // step 3
+            //page.checkClickableTab(); // step 3
 
             System.out.println("-------------STEP 4--------------");
-            page.checkSumm(850.26f, 50.0f); // step 4
+            //page.checkSumm(850.26f, 50.0f); // step 4
 
             System.out.println("-------------STEP 5--------------");
-            page.click(By.xpath(PATH_AVG_BLOCK)); // step 5
+            //page.click(By.xpath(PATH_AVG_BLOCK)); // step 5
 
             System.out.println("-------------STEP 6--------------");
-            page.checkSumm(1145.02f, 50.0f); // step 6
+            //page.checkSumm(1145.02f, 50.0f); // step 6
 
             System.out.println("-------------STEP 7--------------");
-            selectSportBlock(); // step 7
+            //page.selectSportBlock(); // step 7
 
             System.out.println("-------------STEP 8--------------");
-            checkTextValue(); // step 8
+            //page.checkTextValue(); // step 8
 
             System.out.println("-------------STEP 9--------------");
-            selectProvidentBlock(); // step 9
+            //page.selectProvidentBlock(); // step 9
 
             System.out.println("-------------STEP 10--------------");
-            //selectProtectBag(); // step 10
+            //page.selectProtectBag(); // step 10
 
             System.out.println("Test complete!");
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @After
+    public void afterTest() {
+        System.out.println("Test completed!");
     }
 }

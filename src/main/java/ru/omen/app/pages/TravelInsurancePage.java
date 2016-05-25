@@ -46,6 +46,12 @@ public class TravelInsurancePage extends AnyPages {
     @FindBy(xpath = "//dl[dt[contains(., 'Итоговая стоимость')]]//dd[1]//span[1]")
     private WebElement txtSumm;
 
+    static final String PATH_SPORT_PACK = "//div[span[text()='Спортивный']]";
+    static final String PATH_PRED_PACK = "//div[span[text()='Предусмотрительный']]";
+    static final String PATH_BAG_PACK = "//div[span[text()='Защита багажа']]";
+
+    static final String PATH_PRICE = "//span[contains(@class,'b-form-sum-big-font-size') and @aria-hidden='false']"; // Текст с ценой
+
     public TravelInsurancePage() {
         new WebDriverWait(Init.getDriver(), 30)
                 .until(ExpectedConditions
@@ -124,5 +130,49 @@ public class TravelInsurancePage extends AnyPages {
         click(By.xpath(pathPack));
         checkSumm(add+sum, 0.5f);
         System.out.println("\tsum before = " + sum + "\t\n" + "\tadd = " + add + "\t\n" + "\tsum after = " + getSumm());
+    }
+
+    public void checkTextValue() {
+        String pathText1 = PATH_SPORT_PACK + "//span[contains(@class, 'b-form-box-title')]";
+        String pathText2 = PATH_SPORT_PACK + "//ul//li[1]";
+        String pathText3 = PATH_SPORT_PACK + "//ul//li[2]";
+        String pathText4 = PATH_SPORT_PACK + "//ul//li[3]";
+        String pathText5 = PATH_SPORT_PACK + PATH_PRICE;
+
+        WebElement element = Init.getDriver().findElement(By.xpath(pathText1));
+        Assert.assertEquals(element.getText(), "Спортивный");
+
+        element = Init.getDriver().findElement(By.xpath(pathText2));
+        Assert.assertEquals(element.getText(), "Активные виды спорта");
+
+        element = Init.getDriver().findElement(By.xpath(pathText3));
+        Assert.assertEquals(element.getText(), "Защита спортинвентаря");
+
+        element = Init.getDriver().findElement(By.xpath(pathText4));
+        Assert.assertEquals(element.getText(), "Ski-pass / Лавина");
+
+        element = Init.getDriver().findElement(By.xpath(pathText5));
+        Assert.assertTrue("Строка не содержит ~2 485,01", element.getText()
+                .substring(0, element.getText().length()-1)
+                .trim()
+                .matches("^2 4\\d\\d,\\d\\d$"));
+
+        System.out.println("new checkTextValue_OK");
+    }
+
+    public void selectSportBlock() throws InterruptedException {
+        selectDopPackAndCheckSumm(PATH_SPORT_PACK, PATH_PRICE);
+        System.out.println("new selectSportBlock_OK");
+    }
+
+    public void selectProvidentBlock() throws InterruptedException {
+        selectDopPackAndCheckSumm(PATH_PRED_PACK, PATH_PRICE);
+        System.out.println("new selectProvidentBlock_OK");
+    }
+
+    public void selectProtectBag() throws InterruptedException {
+        click(By.xpath(PATH_SPORT_PACK));
+        selectDopPackAndCheckSumm(PATH_BAG_PACK, PATH_PRICE);
+        System.out.println("new selectProtectBag_OK");
     }
 }

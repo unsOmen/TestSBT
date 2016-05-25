@@ -20,7 +20,7 @@ public class Test_3 {
         Init.initProperties();
     }
 
-    @Test
+    //@Test
     public void test() throws InterruptedException {
         new SearchAtmStepsDefinitions().testPlan(Init.getDriver());
     }

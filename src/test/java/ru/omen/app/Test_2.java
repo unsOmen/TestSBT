@@ -27,7 +27,7 @@ public class Test_2 {
         Init.initProperties();
     }
 
-    @Test
+    //@Test
     public void test() throws InterruptedException {
         new ConverterStepsDefinitions().testPlan(Init.getDriver());
     }
