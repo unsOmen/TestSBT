@@ -22,7 +22,7 @@ public class Test_3 {
 
     //@Test
     public void test() throws InterruptedException {
-        new SearchAtmStepsDefinitions().testPlan(Init.getDriver());
+
     }
 
     @After

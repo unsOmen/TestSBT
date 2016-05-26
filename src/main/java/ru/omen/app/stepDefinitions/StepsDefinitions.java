@@ -86,47 +86,10 @@ public class StepsDefinitions {
         System.out.println("-------------STEP 10--------------");
         page.selectProtectBag();
     }
-    public void testPlan(WebDriver driver) {
-        try {
-            System.out.println("-------------STEP 1--------------");
-            //openURL(); // step 1
-
-
-            System.out.println("-------------STEP 2--------------");
-            //page.checkDefValues(); // step 2
-
-            System.out.println("-------------STEP 3--------------");
-            //page.checkClickableTab(); // step 3
-
-            System.out.println("-------------STEP 4--------------");
-            //page.checkSumm(850.26f, 50.0f); // step 4
-
-            System.out.println("-------------STEP 5--------------");
-            //page.click(By.xpath(PATH_AVG_BLOCK)); // step 5
-
-            System.out.println("-------------STEP 6--------------");
-            //page.checkSumm(1145.02f, 50.0f); // step 6
-
-            System.out.println("-------------STEP 7--------------");
-            //page.selectSportBlock(); // step 7
-
-            System.out.println("-------------STEP 8--------------");
-            //page.checkTextValue(); // step 8
-
-            System.out.println("-------------STEP 9--------------");
-            //page.selectProvidentBlock(); // step 9
-
-            System.out.println("-------------STEP 10--------------");
-            //page.selectProtectBag(); // step 10
-
-            System.out.println("Test complete!");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     @After
     public void afterTest() {
+        //driver.quit();
         System.out.println("Test completed!");
     }
 }

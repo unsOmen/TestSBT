@@ -78,7 +78,7 @@
                 <version>2.18.1</version>
                 <configuration>
                     <argLine>
-                        -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/1.8.4/aspectjweaver-1.8.4.jar
+                        -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/1.8.4/aspectjweaver-1.8.4.jar -Dcucumber.options="--tags @test1,@test2,@test3"
                     </argLine>
                 </configuration>
                 <dependencies>

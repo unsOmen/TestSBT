@@ -3,6 +3,8 @@ package lib;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.firefox.internal.ProfilesIni;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -40,10 +42,6 @@ public class Init {
         }
     }
 
-    public static void setProperty(Object key, Object value) {
-        stash.put(key, value);
-    }
-
     public static Object getProperty(String prop) {
         return stash.get(prop);
     }
@@ -64,8 +62,11 @@ public class Init {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         switch (stash.get("browser").toString()) {
             case "Firefox":
-                capabilities.setBrowserName("firefox");
-                setDriver(new FirefoxDriver(capabilities));
+                //capabilities.setBrowserName("firefox");
+                //setDriver(new FirefoxDriver(capabilities));
+                ProfilesIni profile = new ProfilesIni();
+                FirefoxProfile ffprofile = profile.getProfile("SELENIUM");
+                setDriver(new FirefoxDriver(ffprofile));
                 break;
 
             case "Chrome":
